@@ -465,8 +465,7 @@ function countInvalidKexts(){
     	else
     		if [ $(ls -1 "${folderToVerify}"/*.kext 2>/dev/null | $wcPath -l) -eq 0 ]; then echo "-3"; #no kexts were found in this directory
     		else
-    			cd $folderToVerify
-    		 	echo "$($findPath $folderToVerify/*.kext -prune -type d | while read kext; do
+    		 	echo "$($findPath "$folderToVerify"/*.kext -prune -type d | while read kext; do
     			codesign -v "$kext" 2>&1 | grep -E 'invalid signature|not signed at all'
     			done | $wcPath -l | $trPath -d ' ')"
 			fi
